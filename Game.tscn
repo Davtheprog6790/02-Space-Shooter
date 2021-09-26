@@ -1,0 +1,85 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Rocket.png" type="Texture" id=1]
+[ext_resource path="res://Rocketman.gd" type="Script" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://Asteroid.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Nemesis.gd" type="Script" id=5]
+
+[sub_resource type="AnimatedTexture" id=1]
+
+[sub_resource type="CanvasItemMaterial" id=2]
+
+[node name="Game" type="Node2D"]
+
+[node name="Rocketman" type="KinematicBody2D" parent="."]
+position = Vector2( 512, 300 )
+scale = Vector2( 0.5, 0.5 )
+collision_mask = 2
+script = ExtResource( 2 )
+__meta__ = {
+"_editor_description_": "Rocketman"
+}
+
+[node name="Sprite" type="Sprite" parent="Rocketman"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+normal_map = SubResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rocketman"]
+material = SubResource( 2 )
+scale = Vector2( 0.5, 0.5 )
+polygon = PoolVector2Array( 7.5, -323.4, 14.5, -317.4, 14.5, -315.1, 36.5, -275, 36.5, -271.9, 65.5, -193.9, 65.5, -189.5, 84.5, -114.7, 84.5, -108.5, 91.5, -55.6, 91.5, -35.5, 89.5, 12.5, 88.4, 12.5, 84.4, 65.5, 83.2, 65.5, 65.8, 172.9, 85.5, 198.8, 85.5, 200.9, 97.9, 223.5, 95.2, 223.5, 80.2, 315.5, 78.7, 315.5, 74.7, 323.5, 66.8, 323.5, 61.5, 325.3, 61.5, 322.5, 57.5, 319.5, 57.5, 314.5, 44, 265.5, 43.2, 265.5, 34.2, 244.5, 19.5, 249, 19.5, 253.7, 3.10001, 325.5, -7.10001, 325.5, -23.2, 248.5, -25.6, 245.5, -27.9, 245.5, -33.2, 243.2, -42.5, 260, -42.5, 262.8, -62, 324.5, -67.9, 324.5, -79.5, 319.9, -79.5, 316.5, -85.5, 292.7, -85.5, 286.5, -96.8, 214.5, -94.6, 214.5, -82.7, 193.5, -81.5, 193.5, -66.5, 174.8, -66.5, 172.5, -67.2, 172.5, -79.5, 105.7, -79.5, 98.5, -88.5, 30.6, -88.5, 17.5, -91.5, -61.5, -90.4, -61.5, -88.4, -93.5, -87.2, -93.5, -73.2, -170.5, -72, -170.5, -52, -239.5, -50.9, -239.5, -27.9, -297.5, -26.7, -297.5, -17.7, -314.5, -16.3, -314.5, -7.5, -323.3, -7.5, -325.5, 7.5, -325.5 )
+
+[node name="Nemesis" type="KinematicBody2D" parent="."]
+scale = Vector2( 2, 2 )
+collision_layer = 2
+script = ExtResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="Nemesis"]
+position = Vector2( 90, 70 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": "Enemy"
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Nemesis"]
+position = Vector2( 90, 70 )
+polygon = PoolVector2Array( 32, -32, 32, 32, -32, 32, -32, -32, 31, -32 )
+
+[node name="Nemesis2" type="KinematicBody2D" parent="."]
+position = Vector2( 400, 400 )
+scale = Vector2( 2, 2 )
+collision_layer = 2
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_description_": "Enemy"
+}
+
+[node name="Sprite2" type="Sprite" parent="Nemesis2"]
+position = Vector2( 200, 50 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": "Enemy"
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Nemesis2"]
+position = Vector2( 200, 50 )
+polygon = PoolVector2Array( 32, -32, 32, 32, -32, 32, -32, -32, 31, -32 )
+
+[node name="Rocketbullets" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+margin_left = 2.245
+margin_right = 1026.24
+margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Asteroid" type="Node2D" parent="."]
+
+[node name="RigidBody2D" parent="Asteroid" instance=ExtResource( 4 )]
+
+[node name="Booms" type="Node2D" parent="."]
